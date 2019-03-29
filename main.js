@@ -76,9 +76,13 @@ async function load() {
 
 async function main() {
   const preimage = rbigint(30);
-  const hash = hashData(preimage);
+  let hash = preimage;
+  for (var i = 0; i < 5; i++) {
+    hash = hashData(hash);
+  }
 
   const { circuit, pk, vk } = await load();
+  console.log("Coinstraint count:", circuit.nConstraints);
 
   console.log("Generating proof");
   console.time("Proof");
